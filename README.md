@@ -1,6 +1,90 @@
 # netlogo_moneda_social
 Simulación de un mercado de moneda social con caja de canje con otras monedas
 
+Este programa es una simulación que utiliza el lenguaje de programación NetLogo para recrear cómo interactúan varios participantes en un sistema económico. El objetivo es observar cómo las personas (a las que llamaremos prosumidores) compran, venden, y gestionan sus recursos utilizando dos tipos de monedas: G1 (una moneda local) y Euros.
+
+El programa también incluye una Caja central que presta dinero a los prosumidores que lo necesitan y que, en algunas situaciones, puede donar Euros. Los prosumidores pueden entrar en frustración y ser eliminados del sistema si no tienen suficientes recursos para seguir operando.
+
+¿Quiénes son los "Prosumidores"?
+Los prosumidores son los actores principales del sistema. Son personas que pueden actuar como compradores o vendedores.
+
+Un comprador gasta su dinero (G1 o Euros) para comprar cosas.
+Un vendedor recibe dinero cuando vende algo.
+Cada prosumidor tiene una cantidad de dinero en G1 y en Euros. Durante la simulación, los prosumidores intentan:
+
+Comprar o vender productos.
+Mantener un saldo positivo para no entrar en frustración.
+¿Qué es la Caja?
+La Caja es como un banco central que administra:
+
+Préstamos: Si un prosumidor no tiene suficiente dinero en G1 para comprar algo, la Caja le puede prestar G1.
+Donaciones de Euros: Si un prosumidor no tiene dinero en G1 ni en Euros, la Caja le puede donar Euros para que pueda seguir operando.
+Principales Funciones del Programa
+1. Inicialización del sistema (setup)
+Cuando comienza la simulación, el programa crea:
+
+Una cantidad definida de prosumidores (compradores y vendedores) con roles y saldos de dinero.
+La Caja, que empieza con un saldo inicial de G1 y Euros.
+2. Ejecución del ciclo (go)
+Este es el corazón del programa. Cada vez que el programa da un paso (llamado ciclo), los prosumidores y la Caja realizan varias acciones:
+
+Compradores: Tratan de comprar productos, pero solo lo hacen si tienen suficiente dinero.
+Vendedores: Venden productos si tienen suficientes cosas para vender.
+Caja: Si un comprador no tiene suficiente dinero, la Caja puede prestarle o donarle Euros.
+Frustración: Si un prosumidor se queda sin dinero y no puede seguir comprando, entra en frustración y es eliminado del sistema.
+3. Compras y Ventas (interact, make-sale, make-purchase)
+Cuando un comprador y un vendedor se encuentran, pueden realizar una transacción. Dependiendo de las cantidades y del saldo del comprador:
+
+Si el comprador tiene suficiente G1, realiza la compra, y el vendedor recibe el dinero.
+Si no tiene suficiente, puede recibir un préstamo de la Caja o donar Euros para completar la transacción.
+4. Préstamos y Donaciones (prestar-de-la-caja, realizar-donacion-euros)
+Cuando un prosumidor se queda sin dinero:
+
+Préstamos: La Caja le presta G1 al prosumidor para que pueda seguir operando.
+Donaciones: Si el prosumidor no tiene ni G1 ni Euros, la Caja le dona Euros para que pueda comprar.
+5. Frustración y Bajas (check-frustration)
+Si un prosumidor llega a un punto en que no tiene dinero en G1 y no puede conseguir más, se marca como frustrado. Esto significa que:
+
+Deja de operar en el sistema.
+Se transfiere todo su dinero restante a la Caja, y es eliminado de la simulación.
+6. Crisis Financiera (crisis-financiera)
+De manera aleatoria, puede ocurrir una crisis financiera que afecta a todos los prosumidores. Durante una crisis:
+
+Todos los prosumidores ven reducidos sus saldos de G1 y Euros.
+Esto incrementa las dificultades para realizar compras y ventas, y aumenta la probabilidad de frustración.
+Casuísticas Principales del Programa
+Compra y Venta:
+
+Los compradores intentan gastar su G1 para obtener productos.
+Si no tienen suficiente dinero, pueden recibir un préstamo o donación.
+Los vendedores ganan G1 con cada venta.
+Préstamos de la Caja:
+
+Si un comprador no puede pagar, la Caja interviene para prestarle G1.
+Si la Caja tiene poco dinero en G1, puede negar el préstamo.
+Frustración:
+
+Si un prosumidor se queda sin dinero para operar, se frustra y es eliminado.
+Esto ocurre cuando un prosumidor tiene un saldo negativo que no puede corregir.
+Crisis Financiera:
+
+De manera aleatoria, ocurre una crisis que afecta a todos los prosumidores, reduciendo sus recursos y aumentando la dificultad de realizar transacciones.
+Visualización y Gráficos
+El programa también incluye gráficos que muestran el comportamiento del sistema a lo largo del tiempo:
+
+Saldo Total en G1 y Euros: Muestra cómo evolucionan los saldos de todos los prosumidores.
+Crisis y Frustración: Registra cuántos prosumidores se frustran y cuántas crisis han ocurrido.
+¿Qué puedes observar con este programa?
+Este programa te permite observar cómo los prosumidores interactúan en un entorno económico con recursos limitados y desafíos como crisis financieras. Puedes ver cómo los préstamos, donaciones y frustraciones afectan el comportamiento de un sistema económico, y cómo se desenvuelven los actores en un ambiente donde los recursos son limitados.
+
+Resumen
+Prosumidores: Compran, venden y dependen de sus saldos de G1 y Euros.
+Caja: Actúa como un banco central que otorga préstamos y donaciones.
+Frustración: Si un prosumidor no tiene suficiente dinero para operar, es eliminado.
+Crisis Financiera: Un evento aleatorio que reduce los recursos de todos y complica el sistema.
+Este programa ofrece una vista simplificada pero interesante de cómo funcionan las interacciones económicas y los préstamos en un sistema de múltiples monedas, mostrando cómo el equilibrio puede cambiar debido a factores externos como las crisis o la falta de recursos.
+
+
 README Técnico Detallado: Modelo de Prosumidores con Caja, Préstamos y Frustración en NetLogo
 Descripción General
 Este programa en NetLogo simula un sistema económico complejo en el que prosumidores (actores que pueden actuar como compradores y vendedores) interactúan mediante transacciones económicas. Los prosumidores utilizan dos tipos de monedas: G1 (una moneda local) y Euros (moneda fiduciaria). Las interacciones principales incluyen compras, ventas, préstamos, donaciones, y frustración cuando el saldo es insuficiente para operar.
