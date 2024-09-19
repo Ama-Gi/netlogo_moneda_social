@@ -1,5 +1,6 @@
 # netlogo_moneda_social
 Simulación de un mercado de moneda social con caja de canje con otras monedas
+
 README: Modelo NetLogo de Prosumidores con Caja, Préstamos y Frustración
 Descripción General
 Este programa en NetLogo simula un sistema económico basado en transacciones entre prosumidores (compradores y vendedores) que utilizan dos tipos de monedas: G1 y Euros. Los prosumidores realizan compras, ventas, pueden recibir préstamos o donaciones de una Caja central, y pueden enfrentar frustración si sus saldos son insuficientes. El modelo evalúa la dinámica del sistema a lo largo del tiempo, registrando transacciones, frustraciones, y aplicando ciertas condiciones de crisis financiera.
