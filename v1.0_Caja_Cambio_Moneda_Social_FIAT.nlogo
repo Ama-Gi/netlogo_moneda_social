@@ -93,16 +93,18 @@ to setup-turtle
     set shape "circle"
   ]
   set color white
+  set size 1.5  ;; tamaño original
 end
 
 to create-caja
   create-turtles 1 [
     setxy 0 0
     set shape "house"
-    set color white
+    set color yellow
     set saldo-g1 0
     set saldo-euro 0
     set rol "caja"
+    set size 1.5
   ]
 end
 
@@ -386,17 +388,19 @@ to check-frustration ;por cada prosumidor
 end
 
 to update-color
+  if rol = "caja" [set color yellow]
+
 ;; Aqui usa colores y agrega el simbolo del uso de moneda G1
   if saldo-g1 = 0 [
     set color white
-    set label "-Ĝ"
+    set label "N"
   ]
   if saldo-g1 > 0  [
     set color green
     set label "+Ĝ"
   ]
   if  saldo-g1 < 0 [
-    set color red
+    set color orange
     set label "X"
   ]
   if  preferencial = true [
@@ -405,14 +409,15 @@ to update-color
   ]
   ;; Aqui mantiene colores pero agrega a lo anterior el simbolo de euro si han usado euros y por tanto tienen saldo en euros, para poder visualizar a este grupo de personas
   if saldo-euro > 0 and saldo-g1 = 0 [
-    set color yellow
-    set label "-Ĝ€"
-  ]  if saldo-euro > 0 and saldo-g1 > 0 [
+    set color white
+    set label "€"
+  ]
+  if saldo-euro > 0 and saldo-g1 > 0 [
     set color green
     set label "+Ĝ€"
   ]
-  if saldo-euro > 0 and saldo-g1 < 0 [
-    set color red
+  if saldo-euro < 0 and saldo-g1 < 0 [
+    set color orange
     set label "X€"
   ]
   if  preferencial = true [
@@ -569,7 +574,7 @@ to apply-bonuses
   ;; Marcar como preferenciales a los que están en el top 20%
   ask top-turtles [
     set preferencial true
-    set size  2
+    set size  2.5
     set color blue
     set label "P"
   ]
@@ -577,7 +582,7 @@ to apply-bonuses
   ;; Remover el estatus preferencial si ya no están en el top 20%
   ask turtles with [preferencial = true and not member? self top-turtles] [
     set preferencial false
-    set size 1  ;; Volver al tamaño original
+    set size 1.5  ;; Volver al tamaño original
     set color white
     set label ""
   ]
@@ -653,10 +658,10 @@ to crisis-financiera
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-291
-13
-723
-446
+286
+10
+718
+443
 -1
 -1
 12.85
@@ -673,8 +678,8 @@ GRAPHICS-WINDOW
 16
 -16
 16
-0
-0
+1
+1
 1
 ticks
 30.0
@@ -902,14 +907,14 @@ PENS
 
 SLIDER
 17
-254
+276
 190
-287
+309
 usuarios
 usuarios
 0
-1000
-102.0
+500
+101.0
 1
 1
 NIL
@@ -917,14 +922,14 @@ HORIZONTAL
 
 SLIDER
 18
-74
+61
 190
-107
+94
 euros
 euros
 0
 200
-80.0
+10.0
 1
 1
 NIL
@@ -932,9 +937,9 @@ HORIZONTAL
 
 SLIDER
 17
-219
+241
 190
-252
+274
 saldo-g1_entrada
 saldo-g1_entrada
 0
@@ -991,9 +996,9 @@ saldo-total-g1-compradores_vendedores
 
 PLOT
 9
-454
+473
 724
-772
+791
 Desviación Estándar de Saldos
 Días (mercadillos)
 Diferencia
@@ -1056,7 +1061,7 @@ PLOT
 740
 399
 1816
-771
+792
 Total tipos usuario
 Días (mercadillos)
 Cantidad
@@ -1070,15 +1075,15 @@ true
 PENS
 "Activos " 1.0 0 -16777216 true "" "plot count turtles with [rol != \"caja\"]"
 "Deudores activos" 1.0 0 -817084 true "" "plot count turtles with [rol != \"caja\" and saldo-g1 < 0 and saldo-g1 > -90 ]"
-"Nuevos totales" 1.0 0 -8330359 true "" "plot cant_nuevos-usuarios"
+"Nuevos totales" 1.0 0 -3026479 true "" "plot cant_nuevos-usuarios"
 "Frustrados e inactivos" 1.0 0 -2674135 true "" "plot frustrados-historicos"
 "Preferenciales" 1.0 0 -13791810 true "" "plot count turtles with [preferencial = true]"
 
 SLIDER
 18
-187
+209
 190
-220
+242
 probabilidad_nuevos
 probabilidad_nuevos
 0
@@ -1091,9 +1096,9 @@ HORIZONTAL
 
 TEXTBOX
 193
-77
+64
 298
-132
+119
 € disponibles para canje por mes
 11
 0.0
@@ -1109,6 +1114,16 @@ costo-acum
 2
 1
 11
+
+TEXTBOX
+466
+445
+888
+463
+REF: Compradores: triangulos, Vendedores: círculos
+11
+0.0
+1
 
 @#$#@#$#@
 ## WHAT IS IT?
